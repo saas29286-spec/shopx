@@ -8,14 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        body {
-            background: #f8fafc;
-        }
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; }
         .product-card {
             transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             background: white;
@@ -31,13 +27,8 @@
         .gradient-bg {
             background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #7e22ce 100%);
         }
-        .btn-google {
-            transition: all 0.2s;
-        }
-        .btn-google:hover {
-            background: #f3f4f6;
-            transform: scale(1.02);
-        }
+        .btn-google { transition: all 0.2s; }
+        .btn-google:hover { background: #f3f4f6; transform: scale(1.02); }
         .toast-message {
             position: fixed;
             bottom: 30px;
@@ -56,25 +47,12 @@
             background: rgba(30, 41, 59, 0.95);
         }
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #8b5cf6;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 10px; }
         .skeleton {
             background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
             background-size: 200% 100%;
@@ -82,18 +60,354 @@
             border-radius: 1rem;
         }
         @keyframes shimmer {
-            0% { background-position: 200% 0; }
+            0%   { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-        .insta-icon {
-            transition: all 0.2s ease;
+        .insta-icon { transition: all 0.2s ease; }
+        .insta-icon:hover { transform: scale(1.15); color: #e4405f; }
+        .badge-sale { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        /* ===== MAXX AI ASSISTANT ===== */
+        #maxx-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6d28d9, #a21caf);
+            box-shadow: 0 8px 32px rgba(109,40,217,0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            outline: none;
         }
-        .insta-icon:hover {
-            transform: scale(1.15);
-            color: #e4405f;
+        #maxx-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(109,40,217,0.7);
         }
-        .badge-sale {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+        #maxx-fab .maxx-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(109,40,217,0.35);
+            animation: maxxPulse 2s infinite;
+        }
+        @keyframes maxxPulse {
+            0%   { transform: scale(1);   opacity: 0.7; }
+            70%  { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        #maxx-fab .maxx-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Panel */
+        #maxx-panel {
+            position: fixed;
+            bottom: 104px;
+            right: 28px;
+            z-index: 9998;
+            width: 360px;
+            max-height: 560px;
+            border-radius: 24px;
+            background: #0f0c29;
+            background: linear-gradient(160deg, #0f0c29 0%, #1a0533 50%, #24074a 100%);
+            box-shadow: 0 24px 64px rgba(109,40,217,0.45), 0 0 0 1px rgba(139,92,246,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.85) translateY(30px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #maxx-panel.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Panel Header */
+        .maxx-header {
+            background: linear-gradient(90deg, #6d28d9, #a21caf);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .maxx-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .maxx-avatar-ring {
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.4);
+            animation: maxxRing 3s linear infinite;
+        }
+        @keyframes maxxRing {
+            0%   { transform: rotate(0deg);   border-color: rgba(255,255,255,0.4); }
+            50%  { border-color: rgba(255,220,100,0.7); }
+            100% { transform: rotate(360deg); border-color: rgba(255,255,255,0.4); }
+        }
+        .maxx-avatar-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+        }
+        .maxx-status {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 1px;
+        }
+        .maxx-status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            margin-right: 5px;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+        .maxx-close-btn {
+            margin-left: auto;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .maxx-close-btn:hover { background: rgba(255,255,255,0.3); }
+
+        /* Messages */
+        .maxx-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(139,92,246,0.4) transparent;
+        }
+        .maxx-messages::-webkit-scrollbar { width: 4px; }
+        .maxx-messages::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.4); border-radius: 4px; }
+
+        .maxx-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            animation: msgIn 0.3s ease;
+        }
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .maxx-msg.bot {
+            background: rgba(139,92,246,0.18);
+            border: 1px solid rgba(139,92,246,0.25);
+            color: #e2d9f3;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+        .maxx-msg.user {
+            background: linear-gradient(135deg, #6d28d9, #a21caf);
+            color: white;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+        .maxx-msg .maxx-msg-name {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            color: #a78bfa;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Typing indicator */
+        .maxx-typing {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 14px;
+            background: rgba(139,92,246,0.12);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            animation: msgIn 0.3s ease;
+        }
+        .maxx-typing span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #a78bfa;
+            animation: typingDot 1.2s infinite;
+        }
+        .maxx-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .maxx-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingDot {
+            0%, 60%, 100% { transform: translateY(0);    opacity: 0.4; }
+            30%            { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* Suggestions */
+        .maxx-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 16px 10px;
+            flex-shrink: 0;
+        }
+        .maxx-chip {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            color: #c4b5fd;
+            font-size: 11.5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .maxx-chip:hover {
+            background: rgba(139,92,246,0.35);
+            color: white;
+            border-color: rgba(139,92,246,0.6);
+        }
+
+        /* Input area */
+        .maxx-input-area {
+            padding: 12px 16px 16px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            border-top: 1px solid rgba(139,92,246,0.15);
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.2);
+        }
+        #maxx-input {
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 20px;
+            padding: 9px 16px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #maxx-input::placeholder { color: rgba(255,255,255,0.35); }
+        #maxx-input:focus { border-color: rgba(139,92,246,0.7); }
+        .maxx-send-btn, .maxx-mic-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .maxx-send-btn {
+            background: linear-gradient(135deg, #6d28d9, #a21caf);
+            color: white;
+        }
+        .maxx-send-btn:hover { transform: scale(1.1); box-shadow: 0 4px 16px rgba(109,40,217,0.5); }
+        .maxx-mic-btn {
+            background: rgba(255,255,255,0.08);
+            color: #a78bfa;
+            border: 1px solid rgba(139,92,246,0.3);
+        }
+        .maxx-mic-btn:hover { background: rgba(139,92,246,0.25); color: white; }
+        .maxx-mic-btn.listening {
+            background: rgba(239,68,68,0.2);
+            border-color: rgba(239,68,68,0.5);
+            color: #f87171;
+            animation: micPulse 1s infinite;
+        }
+        @keyframes micPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+            50%       { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+        }
+
+        /* Waveform when listening */
+        .maxx-wave {
+            display: none;
+            align-items: center;
+            gap: 3px;
+            padding: 6px 16px;
+            flex-shrink: 0;
+        }
+        .maxx-wave.active { display: flex; }
+        .maxx-wave-bar {
+            width: 3px;
+            border-radius: 3px;
+            background: #a78bfa;
+            animation: waveBar 0.8s ease-in-out infinite;
+        }
+        .maxx-wave-bar:nth-child(1) { height: 8px;  animation-delay: 0s; }
+        .maxx-wave-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+        .maxx-wave-bar:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+        .maxx-wave-bar:nth-child(4) { height: 16px; animation-delay: 0.3s; }
+        .maxx-wave-bar:nth-child(5) { height: 8px;  animation-delay: 0.4s; }
+        .maxx-wave-bar:nth-child(6) { height: 20px; animation-delay: 0.15s; }
+        .maxx-wave-bar:nth-child(7) { height: 12px; animation-delay: 0.25s; }
+        @keyframes waveBar {
+            0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+            50%       { transform: scaleY(1);   opacity: 1; }
+        }
+        .maxx-wave-text {
+            font-size: 11px;
+            color: #a78bfa;
+            margin-left: 8px;
+            font-style: italic;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 420px) {
+            #maxx-panel { width: calc(100vw - 32px); right: 16px; bottom: 96px; }
+            #maxx-fab   { right: 16px; bottom: 20px; }
         }
     </style>
 </head>
@@ -103,7 +417,7 @@
     <nav class="bg-white/95 backdrop-blur-md shadow-xl sticky top-0 z-50 border-b border-purple-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo with Maaz branding -->
+                <!-- Logo -->
                 <div class="flex items-center space-x-2 cursor-pointer group" onclick="scrollToTop()">
                     <div class="gradient-bg w-9 h-9 rounded-xl flex items-center justify-center shadow-lg">
                         <i class="fas fa-bolt text-white text-lg"></i>
@@ -115,18 +429,16 @@
                 <div class="hidden md:block flex-1 max-w-md mx-6">
                     <div class="relative">
                         <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" id="searchDesktop" placeholder="Search 50+ products... shoes, watches, t-shirts, electronics" 
+                        <input type="text" id="searchDesktop" placeholder="Search 50+ products... shoes, watches, t-shirts, electronics"
                             class="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:border-purple-400 transition-all search-focus">
                     </div>
                 </div>
 
                 <!-- User + Social -->
                 <div class="flex items-center gap-3">
-                    <!-- Instagram Icon (primemaazx) -->
                     <a href="https://www.instagram.com/primemaazx/" target="_blank" class="insta-icon flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white shadow-md hover:shadow-xl transition">
                         <i class="fab fa-instagram text-sm"></i>
                     </a>
-                    
                     <div id="userInfo" class="hidden items-center gap-3 bg-gray-50 rounded-full pl-2 pr-4 py-1.5 border border-gray-200">
                         <img id="userAvatar" class="w-8 h-8 rounded-full object-cover border-2 border-purple-300" src="">
                         <span id="userName" class="text-sm font-semibold text-gray-700"></span>
@@ -149,7 +461,7 @@
             <div class="md:hidden pb-3 px-2">
                 <div class="relative">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                    <input type="text" id="searchMobile" placeholder="Search products..." 
+                    <input type="text" id="searchMobile" placeholder="Search products..."
                         class="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:border-purple-400 transition-all">
                 </div>
             </div>
@@ -189,7 +501,6 @@
 
         <!-- Products Grid -->
         <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            <!-- 10 skeleton loaders -->
             <div class="skeleton h-80 rounded-2xl"></div>
             <div class="skeleton h-80 rounded-2xl"></div>
             <div class="skeleton h-80 rounded-2xl"></div>
@@ -198,7 +509,7 @@
         </div>
     </main>
 
-    <!-- Footer with Instagram -->
+    <!-- Footer -->
     <footer class="bg-gray-900 text-white mt-16 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex justify-center gap-8 mb-5 text-3xl">
@@ -217,69 +528,136 @@
         </div>
     </footer>
 
+    <!-- ===================== MAXX AI ASSISTANT ===================== -->
+
+    <!-- FAB Button -->
+    <button id="maxx-fab" onclick="toggleMaxx()" title="Ask Maxx AI">
+        <div class="maxx-pulse"></div>
+        <span class="maxx-label">MAXX</span>
+    </button>
+
+    <!-- Panel -->
+    <div id="maxx-panel">
+        <!-- Header -->
+        <div class="maxx-header">
+            <div class="maxx-avatar">
+                <div class="maxx-avatar-ring"></div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="4" fill="white" opacity="0.9"/>
+                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+                    <circle cx="19" cy="6" r="2" fill="#fbbf24"/>
+                    <path d="M19 4v1M19 9v1M17 6h1M21 6h1" stroke="#fbbf24" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div>
+                <div class="maxx-avatar-name">MAXX</div>
+                <div class="maxx-status">
+                    <span class="maxx-status-dot"></span>AI Assistant · Online
+                </div>
+            </div>
+            <button class="maxx-close-btn" onclick="toggleMaxx()">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div class="maxx-messages" id="maxx-messages"></div>
+
+        <!-- Waveform -->
+        <div class="maxx-wave" id="maxx-wave">
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <div class="maxx-wave-bar"></div>
+            <span class="maxx-wave-text">Listening…</span>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="maxx-suggestions" id="maxx-suggestions">
+            <span class="maxx-chip" onclick="maxxSend('Show me shoes')">👟 Shoes</span>
+            <span class="maxx-chip" onclick="maxxSend('Best watches under ₹2000')">⌚ Watches</span>
+            <span class="maxx-chip" onclick="maxxSend('Electronics deals')">📱 Electronics</span>
+            <span class="maxx-chip" onclick="maxxSend('What can you do?')">💡 Help</span>
+        </div>
+
+        <!-- Input -->
+        <div class="maxx-input-area">
+            <button class="maxx-mic-btn" id="maxx-mic" onclick="toggleMic()" title="Voice input">
+                <i class="fas fa-microphone text-sm"></i>
+            </button>
+            <input type="text" id="maxx-input" placeholder="Ask Maxx anything…" onkeydown="if(event.key==='Enter') maxxSend()">
+            <button class="maxx-send-btn" onclick="maxxSend()" title="Send">
+                <i class="fas fa-paper-plane text-sm"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
-        // ======================== 52 REAL PRODUCTS with EXACT MARKET IMAGES & PRICES (Matching Amazon/Flipkart/Meesho style) ========================
+        // ======================== PRODUCTS ========================
         const PRODUCTS_LIST = [
-            { id: 1, name: "Men's Regular Fit T-Shirt", price: "₹499", mrp: "₹1,299", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop", rating: 4.5, brand: "Roadster", storeLink: "https://www.amazon.in/s?k=roadster+tshirt" },
-            { id: 2, name: "Slim Fit Stretch Jeans", price: "₹1,299", mrp: "₹2,999", image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=400&fit=crop", rating: 4.4, brand: "Levi's", storeLink: "https://www.flipkart.com/search?q=levis+jeans" },
-            { id: 3, name: "Running Sports Shoes", price: "₹1,999", mrp: "₹4,999", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", rating: 4.7, brand: "Nike", storeLink: "https://www.amazon.in/s?k=nike+shoes" },
-            { id: 4, name: "Bluetooth Smart Watch", price: "₹3,499", mrp: "₹8,999", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop", rating: 4.6, brand: "boAt", storeLink: "https://www.meesho.com/search?q=boat+smartwatch" },
-            { id: 5, name: "Noise Cancelling Earbuds", price: "₹2,499", mrp: "₹5,999", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop", rating: 4.8, brand: "Sony", storeLink: "https://www.amazon.in/s?k=sony+earbuds" },
-            { id: 6, name: "Designer Handbag", price: "₹899", mrp: "₹2,499", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop", rating: 4.3, brand: "Lavie", storeLink: "https://www.flipkart.com/search?q=handbag" },
-            { id: 7, name: "Polarized Sunglasses", price: "₹599", mrp: "₹1,999", image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop", rating: 4.2, brand: "Fastrack", storeLink: "https://www.meesho.com/search?q=sunglasses" },
-            { id: 8, name: "Laptop Backpack", price: "₹1,299", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop", rating: 4.5, brand: "Skybags", storeLink: "https://www.amazon.in/s?k=backpack" },
-            { id: 9, name: "Oversized Hoodie", price: "₹1,499", mrp: "₹3,999", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop", rating: 4.7, brand: "HRX", storeLink: "https://www.flipkart.com/search?q=hoodie" },
-            { id: 10, name: "24 inch LED Monitor", price: "₹9,999", mrp: "₹18,999", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop", rating: 4.6, brand: "Samsung", storeLink: "https://www.amazon.in/s?k=monitor" },
-            { id: 11, name: "Wireless Mouse", price: "₹399", mrp: "₹1,299", image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop", rating: 4.3, brand: "Logitech", storeLink: "https://www.meesho.com/search?q=mouse" },
-            { id: 12, name: "Women's Floral Top", price: "₹599", mrp: "₹1,799", image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=400&fit=crop", rating: 4.4, brand: "Zudio", storeLink: "https://www.flipkart.com/search?q=top" },
-            { id: 13, name: "Fitness Tracker Band", price: "₹1,899", mrp: "₹4,999", image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&h=400&fit=crop", rating: 4.5, brand: "Xiaomi", storeLink: "https://www.amazon.in/s?k=fitness+band" },
-            { id: 14, name: "Genuine Leather Wallet", price: "₹399", mrp: "₹1,199", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop", rating: 4.1, brand: "Baggit", storeLink: "https://www.meesho.com/search?q=wallet" },
-            { id: 15, name: "Ethnic Kurta Set", price: "₹1,099", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1618172193763-c511a6357613?w=400&h=400&fit=crop", rating: 4.6, brand: "Manyavar", storeLink: "https://www.amazon.in/s?k=kurta" },
-            { id: 16, name: "Mechanical Keyboard", price: "₹2,899", mrp: "₹6,999", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop", rating: 4.8, brand: "Zebronics", storeLink: "https://www.flipkart.com/search?q=keyboard" },
-            { id: 17, name: "Classic Analog Watch", price: "₹1,999", mrp: "₹4,999", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400&h=400&fit=crop", rating: 4.5, brand: "Titan", storeLink: "https://www.amazon.in/s?k=titan+watch" },
-            { id: 18, name: "Sports Running Shoes", price: "₹2,499", mrp: "₹5,999", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop", rating: 4.7, brand: "Puma", storeLink: "https://www.meesho.com/search?q=puma+shoes" },
-            { id: 19, name: "Bluetooth Speaker", price: "₹1,799", mrp: "₹4,499", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop", rating: 4.4, brand: "JBL", storeLink: "https://www.amazon.in/s?k=jbl+speaker" },
-            { id: 20, name: "Men's Formal Shirt", price: "₹899", mrp: "₹2,299", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop", rating: 4.3, brand: "Louis Philippe", storeLink: "https://www.flipkart.com/search?q=formal+shirt" },
-            { id: 21, name: "Sling Bag", price: "₹699", mrp: "₹1,999", image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400&h=400&fit=crop", rating: 4.2, brand: "Caprese", storeLink: "https://www.meesho.com/search?q=sling+bag" },
-            { id: 22, name: "Gaming Chair", price: "₹8,999", mrp: "₹18,999", image: "https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=400&h=400&fit=crop", rating: 4.8, brand: "Green Soul", storeLink: "https://www.amazon.in/s?k=gaming+chair" },
-            { id: 23, name: "Leather Belt", price: "₹399", mrp: "₹1,099", image: "https://images.unsplash.com/photo-1553704860-ccd89e5f60e6?w=400&h=400&fit=crop", rating: 4.0, brand: "Hidesign", storeLink: "https://www.flipkart.com/search?q=belt" },
-            { id: 24, name: "Track Pants", price: "₹799", mrp: "₹2,199", image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=400&h=400&fit=crop", rating: 4.4, brand: "Puma", storeLink: "https://www.meesho.com/search?q=trackpants" },
-            { id: 25, name: "Women's Heels", price: "₹1,299", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop", rating: 4.5, brand: "Bata", storeLink: "https://www.amazon.in/s?k=heels" },
-            { id: 26, name: "Power Bank 20000mAh", price: "₹1,299", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1609592423755-c0b2c2a6f7f8?w=400&h=400&fit=crop", rating: 4.6, brand: "Mi", storeLink: "https://www.flipkart.com/search?q=powerbank" },
-            { id: 27, name: "Beanie & Gloves Set", price: "₹499", mrp: "₹1,299", image: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=400&h=400&fit=crop", rating: 4.3, brand: "Wildcraft", storeLink: "https://www.meesho.com/search?q=beanie" },
-            { id: 28, name: "Yoga Mat", price: "₹599", mrp: "₹1,799", image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=400&h=400&fit=crop", rating: 4.4, brand: "Decathlon", storeLink: "https://www.amazon.in/s?k=yoga+mat" },
-            { id: 29, name: "Denim Jacket", price: "₹2,299", mrp: "₹5,999", image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&h=400&fit=crop", rating: 4.7, brand: "Wrangler", storeLink: "https://www.flipkart.com/search?q=denim+jacket" },
-            { id: 30, name: "Wireless Charger", price: "₹899", mrp: "₹2,499", image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop", rating: 4.5, brand: "Portronics", storeLink: "https://www.meesho.com/search?q=wireless+charger" },
-            { id: 31, name: "Women's Watch", price: "₹1,599", mrp: "₹4,499", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400&h=400&fit=crop", rating: 4.6, brand: "Fossil", storeLink: "https://www.amazon.in/s?k=fossil+watch" },
-            { id: 32, name: "Sweatshirt", price: "₹999", mrp: "₹2,799", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=400&fit=crop", rating: 4.4, brand: "U.S. Polo", storeLink: "https://www.flipkart.com/search?q=sweatshirt" },
-            { id: 33, name: "Stylish Sneakers", price: "₹2,399", mrp: "₹5,999", image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop", rating: 4.7, brand: "Adidas", storeLink: "https://www.amazon.in/s?k=adidas+sneakers" },
-            { id: 34, name: "VR Box Headset", price: "₹1,499", mrp: "₹4,999", image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=400&h=400&fit=crop", rating: 4.3, brand: "Zebronics", storeLink: "https://www.meesho.com/search?q=vr+headset" },
-            { id: 35, name: "Women's Gown", price: "₹1,199", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=400&fit=crop", rating: 4.5, brand: "Fabindia", storeLink: "https://www.flipkart.com/search?q=gown" },
-            { id: 36, name: "Baseball Cap", price: "₹299", mrp: "₹899", image: "https://images.unsplash.com/photo-1588850571404-5d85b99430e2?w=400&h=400&fit=crop", rating: 4.2, brand: "HRX", storeLink: "https://www.amazon.in/s?k=cap" },
-            { id: 37, name: "Tablet Stand", price: "₹499", mrp: "₹1,299", image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop", rating: 4.4, brand: "AmazonBasics", storeLink: "https://www.meesho.com/search?q=tablet+stand" },
-            { id: 38, name: "Cargo Pants", price: "₹1,399", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=400&h=400&fit=crop", rating: 4.6, brand: "Roadster", storeLink: "https://www.flipkart.com/search?q=cargo" },
-            { id: 39, name: "Ankle Socks Pack", price: "₹199", mrp: "₹599", image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop", rating: 4.1, brand: "Jockey", storeLink: "https://www.amazon.in/s?k=socks" },
-            { id: 40, name: "Hair Dryer", price: "₹1,299", mrp: "₹3,499", image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400&h=400&fit=crop", rating: 4.5, brand: "Philips", storeLink: "https://www.meesho.com/search?q=hair+dryer" },
-            { id: 41, name: "Men's Perfume", price: "₹599", mrp: "₹1,799", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop", rating: 4.6, brand: "Fogg", storeLink: "https://www.flipkart.com/search?q=perfume" },
-            { id: 42, name: "USB-C Cable", price: "₹299", mrp: "₹799", image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop", rating: 4.3, brand: "Portronics", storeLink: "https://www.amazon.in/s?k=usb+cable" },
-            { id: 43, name: "Women's Sandals", price: "₹799", mrp: "₹2,199", image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop", rating: 4.4, brand: "Bata", storeLink: "https://www.meesho.com/search?q=sandals" },
-            { id: 44, name: "Gaming Mouse", price: "₹1,199", mrp: "₹2,999", image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=400&fit=crop", rating: 4.7, brand: "Logitech", storeLink: "https://www.amazon.in/s?k=gaming+mouse" },
-            { id: 45, name: "Kids T-Shirt", price: "₹349", mrp: "₹999", image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400&h=400&fit=crop", rating: 4.5, brand: "United Colors", storeLink: "https://www.flipkart.com/search?q=kids+tshirt" },
-            { id: 46, name: "Travel Duffel Bag", price: "₹1,799", mrp: "₹4,499", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop", rating: 4.6, brand: "American Tourister", storeLink: "https://www.meesho.com/search?q=duffel+bag" },
-            { id: 47, name: "Smart LED Bulb", price: "₹499", mrp: "₹1,299", image: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=400&h=400&fit=crop", rating: 4.3, brand: "Wipro", storeLink: "https://www.amazon.in/s?k=smart+bulb" },
-            { id: 48, name: "Men's Shorts", price: "₹599", mrp: "₹1,599", image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop", rating: 4.4, brand: "Puma", storeLink: "https://www.flipkart.com/search?q=shorts" },
-            { id: 49, name: "Resistance Bands", price: "₹399", mrp: "₹1,199", image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=400&h=400&fit=crop", rating: 4.5, brand: "Decathlon", storeLink: "https://www.amazon.in/s?k=resistance+band" },
-            { id: 50, name: "Leather Jacket", price: "₹3,999", mrp: "₹9,999", image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop", rating: 4.8, brand: "Woodland", storeLink: "https://www.meesho.com/search?q=leather+jacket" },
-            { id: 51, name: "Electric Kettle", price: "₹999", mrp: "₹2,499", image: "https://images.unsplash.com/photo-1577471488277-16f1c6e1c5f4?w=400&h=400&fit=crop", rating: 4.4, brand: "Prestige", storeLink: "https://www.flipkart.com/search?q=kettle" },
-            { id: 52, name: "Men's Wrist Watch", price: "₹2,499", mrp: "₹6,999", image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400&h=400&fit=crop", rating: 4.6, brand: "Casio", storeLink: "https://www.amazon.in/s?k=casio+watch" }
+            { id: 1,  name: "Men's Regular Fit T-Shirt",  price: "₹499",   mrp: "₹1,299",  image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",  rating: 4.5, brand: "Roadster",         category: "clothing",     storeLink: "https://www.amazon.in/s?k=roadster+tshirt" },
+            { id: 2,  name: "Slim Fit Stretch Jeans",      price: "₹1,299", mrp: "₹2,999",  image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=400&fit=crop",  rating: 4.4, brand: "Levi's",           category: "clothing",     storeLink: "https://www.flipkart.com/search?q=levis+jeans" },
+            { id: 3,  name: "Running Sports Shoes",        price: "₹1,999", mrp: "₹4,999",  image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",  rating: 4.7, brand: "Nike",             category: "shoes",        storeLink: "https://www.amazon.in/s?k=nike+shoes" },
+            { id: 4,  name: "Bluetooth Smart Watch",       price: "₹3,499", mrp: "₹8,999",  image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",  rating: 4.6, brand: "boAt",             category: "electronics",  storeLink: "https://www.meesho.com/search?q=boat+smartwatch" },
+            { id: 5,  name: "Noise Cancelling Earbuds",    price: "₹2,499", mrp: "₹5,999",  image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop",  rating: 4.8, brand: "Sony",             category: "electronics",  storeLink: "https://www.amazon.in/s?k=sony+earbuds" },
+            { id: 6,  name: "Designer Handbag",            price: "₹899",   mrp: "₹2,499",  image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop",  rating: 4.3, brand: "Lavie",            category: "bags",         storeLink: "https://www.flipkart.com/search?q=handbag" },
+            { id: 7,  name: "Polarized Sunglasses",        price: "₹599",   mrp: "₹1,999",  image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",  rating: 4.2, brand: "Fastrack",         category: "accessories",  storeLink: "https://www.meesho.com/search?q=sunglasses" },
+            { id: 8,  name: "Laptop Backpack",             price: "₹1,299", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",  rating: 4.5, brand: "Skybags",          category: "bags",         storeLink: "https://www.amazon.in/s?k=backpack" },
+            { id: 9,  name: "Oversized Hoodie",            price: "₹1,499", mrp: "₹3,999",  image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",  rating: 4.7, brand: "HRX",              category: "clothing",     storeLink: "https://www.flipkart.com/search?q=hoodie" },
+            { id: 10, name: "24 inch LED Monitor",         price: "₹9,999", mrp: "₹18,999", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop",  rating: 4.6, brand: "Samsung",          category: "electronics",  storeLink: "https://www.amazon.in/s?k=monitor" },
+            { id: 11, name: "Wireless Mouse",              price: "₹399",   mrp: "₹1,299",  image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop",  rating: 4.3, brand: "Logitech",         category: "electronics",  storeLink: "https://www.meesho.com/search?q=mouse" },
+            { id: 12, name: "Women's Floral Top",          price: "₹599",   mrp: "₹1,799",  image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=400&fit=crop",  rating: 4.4, brand: "Zudio",            category: "clothing",     storeLink: "https://www.flipkart.com/search?q=top" },
+            { id: 13, name: "Fitness Tracker Band",        price: "₹1,899", mrp: "₹4,999",  image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&h=400&fit=crop",  rating: 4.5, brand: "Xiaomi",           category: "electronics",  storeLink: "https://www.amazon.in/s?k=fitness+band" },
+            { id: 14, name: "Genuine Leather Wallet",      price: "₹399",   mrp: "₹1,199",  image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&h=400&fit=crop",  rating: 4.1, brand: "Baggit",           category: "accessories",  storeLink: "https://www.meesho.com/search?q=wallet" },
+            { id: 15, name: "Ethnic Kurta Set",            price: "₹1,099", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1618172193763-c511a6357613?w=400&h=400&fit=crop",  rating: 4.6, brand: "Manyavar",         category: "clothing",     storeLink: "https://www.amazon.in/s?k=kurta" },
+            { id: 16, name: "Mechanical Keyboard",         price: "₹2,899", mrp: "₹6,999",  image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop",  rating: 4.8, brand: "Zebronics",        category: "electronics",  storeLink: "https://www.flipkart.com/search?q=keyboard" },
+            { id: 17, name: "Classic Analog Watch",        price: "₹1,999", mrp: "₹4,999",  image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400&h=400&fit=crop",  rating: 4.5, brand: "Titan",            category: "watches",      storeLink: "https://www.amazon.in/s?k=titan+watch" },
+            { id: 18, name: "Sports Running Shoes",        price: "₹2,499", mrp: "₹5,999",  image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&h=400&fit=crop",  rating: 4.7, brand: "Puma",             category: "shoes",        storeLink: "https://www.meesho.com/search?q=puma+shoes" },
+            { id: 19, name: "Bluetooth Speaker",           price: "₹1,799", mrp: "₹4,499",  image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",  rating: 4.4, brand: "JBL",              category: "electronics",  storeLink: "https://www.amazon.in/s?k=jbl+speaker" },
+            { id: 20, name: "Men's Formal Shirt",          price: "₹899",   mrp: "₹2,299",  image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop",  rating: 4.3, brand: "Louis Philippe",   category: "clothing",     storeLink: "https://www.flipkart.com/search?q=formal+shirt" },
+            { id: 21, name: "Sling Bag",                   price: "₹699",   mrp: "₹1,999",  image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=400&h=400&fit=crop",  rating: 4.2, brand: "Caprese",          category: "bags",         storeLink: "https://www.meesho.com/search?q=sling+bag" },
+            { id: 22, name: "Gaming Chair",                price: "₹8,999", mrp: "₹18,999", image: "https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=400&h=400&fit=crop",  rating: 4.8, brand: "Green Soul",       category: "furniture",    storeLink: "https://www.amazon.in/s?k=gaming+chair" },
+            { id: 23, name: "Leather Belt",                price: "₹399",   mrp: "₹1,099",  image: "https://images.unsplash.com/photo-1553704860-ccd89e5f60e6?w=400&h=400&fit=crop",  rating: 4.0, brand: "Hidesign",         category: "accessories",  storeLink: "https://www.flipkart.com/search?q=belt" },
+            { id: 24, name: "Track Pants",                 price: "₹799",   mrp: "₹2,199",  image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=400&h=400&fit=crop",  rating: 4.4, brand: "Puma",             category: "clothing",     storeLink: "https://www.meesho.com/search?q=trackpants" },
+            { id: 25, name: "Women's Heels",               price: "₹1,299", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop",  rating: 4.5, brand: "Bata",             category: "shoes",        storeLink: "https://www.amazon.in/s?k=heels" },
+            { id: 26, name: "Power Bank 20000mAh",         price: "₹1,299", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1609592423755-c0b2c2a6f7f8?w=400&h=400&fit=crop",  rating: 4.6, brand: "Mi",               category: "electronics",  storeLink: "https://www.flipkart.com/search?q=powerbank" },
+            { id: 27, name: "Beanie & Gloves Set",         price: "₹499",   mrp: "₹1,299",  image: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=400&h=400&fit=crop",  rating: 4.3, brand: "Wildcraft",        category: "accessories",  storeLink: "https://www.meesho.com/search?q=beanie" },
+            { id: 28, name: "Yoga Mat",                    price: "₹599",   mrp: "₹1,799",  image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=400&h=400&fit=crop",  rating: 4.4, brand: "Decathlon",        category: "fitness",      storeLink: "https://www.amazon.in/s?k=yoga+mat" },
+            { id: 29, name: "Denim Jacket",                price: "₹2,299", mrp: "₹5,999",  image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&h=400&fit=crop",  rating: 4.7, brand: "Wrangler",         category: "clothing",     storeLink: "https://www.flipkart.com/search?q=denim+jacket" },
+            { id: 30, name: "Wireless Charger",            price: "₹899",   mrp: "₹2,499",  image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",  rating: 4.5, brand: "Portronics",       category: "electronics",  storeLink: "https://www.meesho.com/search?q=wireless+charger" },
+            { id: 31, name: "Women's Watch",               price: "₹1,599", mrp: "₹4,499",  image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400&h=400&fit=crop",  rating: 4.6, brand: "Fossil",           category: "watches",      storeLink: "https://www.amazon.in/s?k=fossil+watch" },
+            { id: 32, name: "Sweatshirt",                  price: "₹999",   mrp: "₹2,799",  image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=400&fit=crop",  rating: 4.4, brand: "U.S. Polo",        category: "clothing",     storeLink: "https://www.flipkart.com/search?q=sweatshirt" },
+            { id: 33, name: "Stylish Sneakers",            price: "₹2,399", mrp: "₹5,999",  image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop",  rating: 4.7, brand: "Adidas",           category: "shoes",        storeLink: "https://www.amazon.in/s?k=adidas+sneakers" },
+            { id: 34, name: "VR Box Headset",              price: "₹1,499", mrp: "₹4,999",  image: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=400&h=400&fit=crop",  rating: 4.3, brand: "Zebronics",        category: "electronics",  storeLink: "https://www.meesho.com/search?q=vr+headset" },
+            { id: 35, name: "Women's Gown",                price: "₹1,199", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=400&fit=crop",  rating: 4.5, brand: "Fabindia",         category: "clothing",     storeLink: "https://www.flipkart.com/search?q=gown" },
+            { id: 36, name: "Baseball Cap",                price: "₹299",   mrp: "₹899",    image: "https://images.unsplash.com/photo-1588850571404-5d85b99430e2?w=400&h=400&fit=crop",  rating: 4.2, brand: "HRX",              category: "accessories",  storeLink: "https://www.amazon.in/s?k=cap" },
+            { id: 37, name: "Tablet Stand",                price: "₹499",   mrp: "₹1,299",  image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",  rating: 4.4, brand: "AmazonBasics",    category: "electronics",  storeLink: "https://www.meesho.com/search?q=tablet+stand" },
+            { id: 38, name: "Cargo Pants",                 price: "₹1,399", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=400&h=400&fit=crop",  rating: 4.6, brand: "Roadster",         category: "clothing",     storeLink: "https://www.flipkart.com/search?q=cargo" },
+            { id: 39, name: "Ankle Socks Pack",            price: "₹199",   mrp: "₹599",    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop",  rating: 4.1, brand: "Jockey",           category: "clothing",     storeLink: "https://www.amazon.in/s?k=socks" },
+            { id: 40, name: "Hair Dryer",                  price: "₹1,299", mrp: "₹3,499",  image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400&h=400&fit=crop",  rating: 4.5, brand: "Philips",          category: "appliances",   storeLink: "https://www.meesho.com/search?q=hair+dryer" },
+            { id: 41, name: "Men's Perfume",               price: "₹599",   mrp: "₹1,799",  image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop",  rating: 4.6, brand: "Fogg",             category: "grooming",     storeLink: "https://www.flipkart.com/search?q=perfume" },
+            { id: 42, name: "USB-C Cable",                 price: "₹299",   mrp: "₹799",    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",  rating: 4.3, brand: "Portronics",       category: "electronics",  storeLink: "https://www.amazon.in/s?k=usb+cable" },
+            { id: 43, name: "Women's Sandals",             price: "₹799",   mrp: "₹2,199",  image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop",  rating: 4.4, brand: "Bata",             category: "shoes",        storeLink: "https://www.meesho.com/search?q=sandals" },
+            { id: 44, name: "Gaming Mouse",                price: "₹1,199", mrp: "₹2,999",  image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&h=400&fit=crop",  rating: 4.7, brand: "Logitech",         category: "electronics",  storeLink: "https://www.amazon.in/s?k=gaming+mouse" },
+            { id: 45, name: "Kids T-Shirt",                price: "₹349",   mrp: "₹999",    image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400&h=400&fit=crop",  rating: 4.5, brand: "United Colors",    category: "clothing",     storeLink: "https://www.flipkart.com/search?q=kids+tshirt" },
+            { id: 46, name: "Travel Duffel Bag",           price: "₹1,799", mrp: "₹4,499",  image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",  rating: 4.6, brand: "American Tourister",category: "bags",         storeLink: "https://www.meesho.com/search?q=duffel+bag" },
+            { id: 47, name: "Smart LED Bulb",              price: "₹499",   mrp: "₹1,299",  image: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=400&h=400&fit=crop",  rating: 4.3, brand: "Wipro",            category: "appliances",   storeLink: "https://www.amazon.in/s?k=smart+bulb" },
+            { id: 48, name: "Men's Shorts",                price: "₹599",   mrp: "₹1,599",  image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop",  rating: 4.4, brand: "Puma",             category: "clothing",     storeLink: "https://www.flipkart.com/search?q=shorts" },
+            { id: 49, name: "Resistance Bands",            price: "₹399",   mrp: "₹1,199",  image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=400&h=400&fit=crop",  rating: 4.5, brand: "Decathlon",        category: "fitness",      storeLink: "https://www.amazon.in/s?k=resistance+band" },
+            { id: 50, name: "Leather Jacket",              price: "₹3,999", mrp: "₹9,999",  image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop",  rating: 4.8, brand: "Woodland",         category: "clothing",     storeLink: "https://www.meesho.com/search?q=leather+jacket" },
+            { id: 51, name: "Electric Kettle",             price: "₹999",   mrp: "₹2,499",  image: "https://images.unsplash.com/photo-1577471488277-16f1c6e1c5f4?w=400&h=400&fit=crop",  rating: 4.4, brand: "Prestige",         category: "appliances",   storeLink: "https://www.flipkart.com/search?q=kettle" },
+            { id: 52, name: "Men's Wrist Watch",           price: "₹2,499", mrp: "₹6,999",  image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400&h=400&fit=crop",  rating: 4.6, brand: "Casio",            category: "watches",      storeLink: "https://www.amazon.in/s?k=casio+watch" }
         ];
-        
-        // Google Sign-In Simulation (fully functional)
+
+        // ======================== AUTH ========================
         let currentUser = null;
-        
+
         function showToast(message, isError = false) {
             const existing = document.querySelector('.toast-message');
-            if(existing) existing.remove();
+            if (existing) existing.remove();
             const toast = document.createElement('div');
             toast.className = 'toast-message';
             toast.innerHTML = `<i class="${isError ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'} mr-2"></i>${message}`;
@@ -287,7 +665,7 @@
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
-        
+
         document.getElementById('googleLoginBtn').addEventListener('click', () => {
             const mockUser = {
                 name: "Maaz Shaikh",
@@ -299,7 +677,7 @@
             updateUIForUser(mockUser);
             showToast(`Welcome back ${mockUser.name}! 🎉 Google Sign-in successful`);
         });
-        
+
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('shopx_user');
             currentUser = null;
@@ -307,7 +685,7 @@
             document.getElementById('googleLoginBtn').style.display = 'flex';
             showToast("Signed out successfully");
         });
-        
+
         function updateUIForUser(user) {
             document.getElementById('googleLoginBtn').style.display = 'none';
             const userDiv = document.getElementById('userInfo');
@@ -315,33 +693,30 @@
             document.getElementById('userName').innerText = user.name.split(' ')[0];
             document.getElementById('userAvatar').src = user.avatar;
         }
-        
+
         const saved = localStorage.getItem('shopx_user');
-        if(saved) {
-            currentUser = JSON.parse(saved);
-            updateUIForUser(currentUser);
-        }
-        
-        // Render Products
+        if (saved) { currentUser = JSON.parse(saved); updateUIForUser(currentUser); }
+
+        // ======================== PRODUCTS RENDER ========================
         let searchTerm = '';
-        
+
         function renderProducts() {
-            const filtered = PRODUCTS_LIST.filter(p => 
-                p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            const filtered = PRODUCTS_LIST.filter(p =>
+                p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 p.brand.toLowerCase().includes(searchTerm.toLowerCase())
             );
             document.getElementById('productCount').innerText = filtered.length;
             const grid = document.getElementById('productsGrid');
-            
-            if(filtered.length === 0) {
+
+            if (filtered.length === 0) {
                 grid.innerHTML = `<div class="col-span-full text-center py-20"><i class="fas fa-search text-5xl text-gray-300 mb-3"></i><p class="text-gray-500 text-lg">No products found for "${searchTerm}"</p></div>`;
                 return;
             }
-            
+
             grid.innerHTML = filtered.map(product => `
                 <div class="product-card rounded-2xl overflow-hidden shadow-md border border-gray-100 group bg-white">
                     <div class="relative overflow-hidden h-56">
-                        <img class="w-full h-full object-cover group-hover:scale-110 transition duration-500" src="${product.image}" alt="${product.name}" 
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition duration-500" src="${product.image}" alt="${product.name}"
                             onerror="this.src='https://placehold.co/400x400?text=ShopX'">
                         <span class="absolute top-2 left-2 badge-sale text-white text-[11px] px-2 py-0.5 rounded-full font-bold shadow">${Math.floor(Math.random() * 40) + 20}% OFF</span>
                     </div>
@@ -366,30 +741,26 @@
                     </div>
                 </div>
             `).join('');
-            
-            document.querySelectorAll('.buy-btn').forEach((btn, idx) => {
+
+            document.querySelectorAll('.buy-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const card = btn.closest('.product-card');
-                    const name = card.querySelector('h3').innerText;
+                    const name = btn.closest('.product-card').querySelector('h3').innerText;
                     const productData = PRODUCTS_LIST.find(p => p.name === name);
-                    if(productData) {
-                        redirectToStore(productData);
-                    }
+                    if (productData) redirectToStore(productData);
                 });
             });
         }
-        
+
         function redirectToStore(product) {
             const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             const encoded = encodeURIComponent(product.name);
             const stores = [
-                { name: "Meesho", scheme: "meesho://", web: `https://www.meesho.com/search?q=${encoded}` },
+                { name: "Meesho",   scheme: "meesho://",   web: `https://www.meesho.com/search?q=${encoded}` },
                 { name: "Flipkart", scheme: "flipkart://", web: `https://www.flipkart.com/search?q=${encoded}` },
-                { name: "Amazon", scheme: "amazon://", web: `https://www.amazon.in/s?k=${encoded}` }
+                { name: "Amazon",   scheme: "amazon://",   web: `https://www.amazon.in/s?k=${encoded}` }
             ];
-            
-            if(isMobile) {
+            if (isMobile) {
                 const randomStore = stores[Math.floor(Math.random() * stores.length)];
                 const timeout = setTimeout(() => { window.location.href = randomStore.web; }, 700);
                 window.location.href = randomStore.scheme;
@@ -400,18 +771,301 @@
                 showToast(`Opening Amazon for ${product.name}`, false);
             }
         }
-        
-        function handleSearch(val) {
-            searchTerm = val;
-            renderProducts();
-        }
-        
-        document.getElementById('searchDesktop').addEventListener('input', (e) => handleSearch(e.target.value));
-        document.getElementById('searchMobile').addEventListener('input', (e) => handleSearch(e.target.value));
-        
+
+        function handleSearch(val) { searchTerm = val; renderProducts(); }
+        document.getElementById('searchDesktop').addEventListener('input', e => handleSearch(e.target.value));
+        document.getElementById('searchMobile').addEventListener('input', e => handleSearch(e.target.value));
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        
         renderProducts();
+
+
+        // ======================== MAXX AI ASSISTANT ========================
+        let maxxOpen = false;
+        let maxxGreeted = false;
+        let recognition = null;
+        let isListening = false;
+        let maxxSpeaking = false;
+
+        const synth = window.speechSynthesis;
+
+        function toggleMaxx() {
+            maxxOpen = !maxxOpen;
+            const panel = document.getElementById('maxx-panel');
+            panel.classList.toggle('open', maxxOpen);
+            if (maxxOpen && !maxxGreeted) {
+                maxxGreeted = true;
+                setTimeout(() => {
+                    maxxBotMsg("Hey there! 👋 I'm **Maxx**, your AI shopping assistant. I can help you find products, compare prices, suggest deals, and answer any questions. What are you looking for today?");
+                }, 400);
+            }
+            if (maxxOpen) setTimeout(() => document.getElementById('maxx-input').focus(), 350);
+        }
+
+        function maxxBotMsg(text, delay = 0) {
+            const msgs = document.getElementById('maxx-messages');
+
+            // Show typing indicator
+            const typing = document.createElement('div');
+            typing.className = 'maxx-typing';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            msgs.appendChild(typing);
+            msgs.scrollTop = msgs.scrollHeight;
+
+            setTimeout(() => {
+                typing.remove();
+                const div = document.createElement('div');
+                div.className = 'maxx-msg bot';
+                div.innerHTML = `<div class="maxx-msg-name">MAXX</div>${formatMaxxText(text)}`;
+                msgs.appendChild(div);
+                msgs.scrollTop = msgs.scrollHeight;
+                maxxSpeak(text.replace(/\*\*/g, '').replace(/[🎉👋🛍️⌚👟📱💡🔥✨🎯💰🛒]/g, ''));
+            }, delay + 900);
+        }
+
+        function maxxUserMsg(text) {
+            const msgs = document.getElementById('maxx-messages');
+            const div = document.createElement('div');
+            div.className = 'maxx-msg user';
+            div.textContent = text;
+            msgs.appendChild(div);
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+
+        function formatMaxxText(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+        }
+
+        function maxxSpeak(text) {
+            if (!synth) return;
+            synth.cancel();
+            const clean = text.substring(0, 200);
+            const utt = new SpeechSynthesisUtterance(clean);
+            utt.rate = 1.05;
+            utt.pitch = 1.1;
+            utt.volume = 0.85;
+            // Pick a nice voice if available
+            const voices = synth.getVoices();
+            const preferred = voices.find(v => v.name.includes('Google') && v.lang.startsWith('en')) ||
+                              voices.find(v => v.lang.startsWith('en'));
+            if (preferred) utt.voice = preferred;
+            synth.speak(utt);
+        }
+
+        function maxxSend(overrideText) {
+            const input = document.getElementById('maxx-input');
+            const text = (overrideText || input.value).trim();
+            if (!text) return;
+            input.value = '';
+            maxxUserMsg(text);
+            hideSuggestions();
+            setTimeout(() => maxxRespond(text), 100);
+        }
+
+        function hideSuggestions() {
+            document.getElementById('maxx-suggestions').style.display = 'none';
+        }
+
+        function maxxRespond(query) {
+            const q = query.toLowerCase();
+
+            // ---- Greetings ----
+            if (/^(hi|hello|hey|hola|sup|yo|namaste|salaam)/.test(q)) {
+                maxxBotMsg("Hey! 👋 Great to see you! I'm Maxx, your ShopX AI assistant. Ask me about products, deals, or anything you need help with!");
+                return;
+            }
+
+            // ---- Who are you / what can you do ----
+            if (/who are you|what are you|your name|what can you do|help/.test(q)) {
+                maxxBotMsg("I'm **Maxx** 🤖 — ShopX's AI assistant, like Siri but for shopping!\n\nHere's what I can do:\n• 🔍 Find products by name, brand, or category\n• 💰 Show cheapest or best-rated items\n• ⌚ Suggest products under a budget\n• 🛍️ Tell you about deals & discounts\n• 💡 Answer general questions\n\nJust ask me anything!");
+                return;
+            }
+
+            // ---- Budget queries ----
+            const budgetMatch = q.match(/under\s*[₹rs]?\s*(\d[\d,]*)/i) || q.match(/below\s*[₹rs]?\s*(\d[\d,]*)/i) || q.match(/less than\s*[₹rs]?\s*(\d[\d,]*)/i);
+            if (budgetMatch) {
+                const budget = parseInt(budgetMatch[1].replace(/,/g, ''));
+                const affordable = PRODUCTS_LIST.filter(p => {
+                    const price = parseInt(p.price.replace(/[₹,]/g, ''));
+                    return price <= budget;
+                }).sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 4);
+
+                if (affordable.length === 0) {
+                    maxxBotMsg(`Hmm, I couldn't find products under ₹${budget.toLocaleString()}. Try a higher budget!`);
+                } else {
+                    const list = affordable.map(p => `• **${p.name}** by ${p.brand} — ${p.price} ⭐${p.rating}`).join('\n');
+                    maxxBotMsg(`🎯 Top picks under ₹${budget.toLocaleString()}:\n\n${list}\n\nWant me to search for any of these?`);
+                }
+                return;
+            }
+
+            // ---- Category searches ----
+            const categoryMap = {
+                shoes: ['shoes', 'sneakers', 'footwear', 'heels', 'sandals', 'boots'],
+                electronics: ['electronics', 'gadgets', 'tech', 'earbuds', 'speaker', 'monitor', 'keyboard', 'mouse', 'charger', 'power bank', 'watch smart', 'smartwatch', 'fitness band', 'vr'],
+                watches: ['watch', 'watches', 'timepiece'],
+                clothing: ['clothes', 'clothing', 'shirt', 'tshirt', 't-shirt', 'jeans', 'hoodie', 'jacket', 'kurta', 'gown', 'top', 'shorts', 'pants', 'sweatshirt', 'cargo'],
+                bags: ['bag', 'bags', 'backpack', 'handbag', 'sling', 'duffel'],
+                fitness: ['fitness', 'gym', 'yoga', 'workout', 'exercise', 'resistance'],
+                accessories: ['accessories', 'sunglasses', 'wallet', 'belt', 'cap', 'beanie', 'socks'],
+            };
+
+            for (const [cat, keywords] of Object.entries(categoryMap)) {
+                if (keywords.some(kw => q.includes(kw))) {
+                    const catProducts = PRODUCTS_LIST.filter(p =>
+                        p.category === cat || keywords.some(kw => p.name.toLowerCase().includes(kw))
+                    ).sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 4);
+
+                    if (catProducts.length > 0) {
+                        const list = catProducts.map(p => `• **${p.name}** — ${p.price} ⭐${p.rating}`).join('\n');
+                        maxxBotMsg(`🛍️ Top ${cat} picks for you:\n\n${list}\n\nScroll up to see them all, or ask me to filter further!`);
+                        // Also filter the main grid
+                        const keyword = keywords[0];
+                        document.getElementById('searchDesktop').value = keyword;
+                        document.getElementById('searchMobile').value = keyword;
+                        handleSearch(keyword);
+                        return;
+                    }
+                }
+            }
+
+            // ---- Best rated / top products ----
+            if (/best|top|highest rated|popular|trending|recommend/.test(q)) {
+                const top = [...PRODUCTS_LIST].sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 5);
+                const list = top.map(p => `• **${p.name}** — ${p.price} ⭐${p.rating}`).join('\n');
+                maxxBotMsg(`🔥 Our highest-rated products right now:\n\n${list}\n\nAll available on Amazon, Flipkart & Meesho!`);
+                return;
+            }
+
+            // ---- Cheapest / deals ----
+            if (/cheap|cheapest|lowest price|affordable|budget|deal|discount|offer/.test(q)) {
+                const cheap = [...PRODUCTS_LIST].sort((a, b) => {
+                    return parseInt(a.price.replace(/[₹,]/g, '')) - parseInt(b.price.replace(/[₹,]/g, ''));
+                }).slice(0, 5);
+                const list = cheap.map(p => `• **${p.name}** — ${p.price} (was ${p.mrp})`).join('\n');
+                maxxBotMsg(`💰 Best deals & lowest prices:\n\n${list}\n\nAll items have 20-60% off! 🎉`);
+                return;
+            }
+
+            // ---- Product name search ----
+            const found = PRODUCTS_LIST.filter(p =>
+                p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)
+            );
+            if (found.length > 0) {
+                const list = found.slice(0, 4).map(p => `• **${p.name}** by ${p.brand} — ${p.price} ⭐${p.rating}`).join('\n');
+                maxxBotMsg(`✨ Found ${found.length} result(s) for "${query}":\n\n${list}\n\nI've filtered the products above for you!`);
+                document.getElementById('searchDesktop').value = query;
+                document.getElementById('searchMobile').value = query;
+                handleSearch(query);
+                return;
+            }
+
+            // ---- Delivery / return / shipping ----
+            if (/deliver|shipping|return|refund|policy/.test(q)) {
+                maxxBotMsg("📦 ShopX Policies:\n\n• **Free Delivery** on all orders\n• **7-Day Easy Returns** — no questions asked\n• **100% Secure** payments via Amazon, Flipkart & Meesho\n• Orders redirect to official store apps for checkout");
+                return;
+            }
+
+            // ---- Payment ----
+            if (/pay|payment|cod|upi|card|emi/.test(q)) {
+                maxxBotMsg("💳 Payment is handled by the store you choose (Amazon, Flipkart, or Meesho). They support:\n• UPI (GPay, PhonePe, Paytm)\n• Credit/Debit Cards\n• Net Banking\n• Cash on Delivery (COD)\n• EMI options on select items");
+                return;
+            }
+
+            // ---- About ShopX ----
+            if (/shopx|about|who made|creator|maaz/.test(q)) {
+                maxxBotMsg("🛒 **ShopX** is a premium product discovery platform crafted by **Maaz Shaikh** (@primemaazx).\n\nWe curate 50+ trending products with real market prices matching Amazon, Flipkart & Meesho. Click 'Buy Now' to go directly to the store!");
+                return;
+            }
+
+            // ---- Time / date ----
+            if (/time|date|today|day/.test(q)) {
+                const now = new Date();
+                maxxBotMsg(`🕐 It's currently **${now.toLocaleTimeString()}** on **${now.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}**. Happy shopping! 🛍️`);
+                return;
+            }
+
+            // ---- Jokes ----
+            if (/joke|funny|laugh/.test(q)) {
+                const jokes = [
+                    "Why did the shopper bring a ladder to the store? Because they heard the prices were through the roof! 😄",
+                    "I told my wallet I was going shopping. It said 'I'm not coming.' 😂",
+                    "Why do shoppers make great detectives? They always find the best deals! 🔍"
+                ];
+                maxxBotMsg(jokes[Math.floor(Math.random() * jokes.length)]);
+                return;
+            }
+
+            // ---- Thanks ----
+            if (/thank|thanks|thx|ty|great|awesome|nice|good/.test(q)) {
+                maxxBotMsg("You're welcome! 😊 Happy shopping on ShopX! If you need anything else, just ask. I'm always here! 🛍️✨");
+                return;
+            }
+
+            // ---- Bye ----
+            if (/bye|goodbye|see you|cya|later/.test(q)) {
+                maxxBotMsg("Goodbye! 👋 Come back anytime for the best deals. Happy shopping! 🛍️");
+                return;
+            }
+
+            // ---- Fallback ----
+            const fallbacks = [
+                `I'm not sure about "${query}", but I can help you find products, deals, or answer shopping questions! Try asking "show me shoes" or "best electronics under ₹2000".`,
+                `Hmm, I didn't quite get that. Try asking me about specific products, categories, or budgets! 🤔`,
+                `I'm still learning! Try asking "best watches", "cheap bags", or "top rated products". 😊`
+            ];
+            maxxBotMsg(fallbacks[Math.floor(Math.random() * fallbacks.length)]);
+        }
+
+        // ======================== VOICE INPUT ========================
+        function toggleMic() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                maxxBotMsg("Voice input isn't supported in your browser. Try Chrome for the best experience! 🎤");
+                return;
+            }
+
+            if (isListening) {
+                stopListening();
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-IN';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = () => {
+                isListening = true;
+                document.getElementById('maxx-mic').classList.add('listening');
+                document.getElementById('maxx-wave').classList.add('active');
+                document.getElementById('maxx-input').placeholder = 'Listening…';
+            };
+
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                document.getElementById('maxx-input').value = transcript;
+                stopListening();
+                setTimeout(() => maxxSend(), 300);
+            };
+
+            recognition.onerror = () => stopListening();
+            recognition.onend = () => stopListening();
+            recognition.start();
+        }
+
+        function stopListening() {
+            isListening = false;
+            if (recognition) { try { recognition.stop(); } catch(e) {} }
+            document.getElementById('maxx-mic').classList.remove('listening');
+            document.getElementById('maxx-wave').classList.remove('active');
+            document.getElementById('maxx-input').placeholder = 'Ask Maxx anything…';
+        }
+
+        // Load voices for speech synthesis
+        if (synth) synth.getVoices();
+        if (synth && synth.onvoiceschanged !== undefined) synth.onvoiceschanged = () => synth.getVoices();
     </script>
 </body>
 </html>
